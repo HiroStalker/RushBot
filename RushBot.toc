@@ -1,4 +1,4 @@
-## Interface: 120001, 120005, 120007
+## Interface: 120100, 120105
 ## Title: RushBot
 ## Notes: Personajes, piedras y tradeo de tu grupo, listo para pegar en Discord.
 ## Author: Hiroro
