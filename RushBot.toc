@@ -2,7 +2,7 @@
 ## Title: RushBot
 ## Notes: Personajes, piedras y tradeo de tu grupo, listo para pegar en Discord.
 ## Author: Hiroro
-## Version: 0.1.0
+## Version: @project-version@
 ## IconTexture: Interface\AddOns\RushBot\Media\icon
 ## SavedVariables: RushBotDB
 ## AddonCompartmentFunc: RushBot_OnAddonCompartmentClick

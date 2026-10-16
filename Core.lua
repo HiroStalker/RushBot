@@ -1,7 +1,8 @@
 local ADDON, RB = ...
 _G.RushBot = RB
 
-RB.version = "0.1.0"
+local v = C_AddOns.GetAddOnMetadata(ADDON, "Version")
+RB.version = (v and not v:find("@", 1, true)) and v or "dev"
 RB.DEFAULT_REF_ILVL = 311
 
 local defaults = {
