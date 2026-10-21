@@ -135,10 +135,11 @@ function RB:Evaluate(char, ref)
   for _, chk in ipairs(self:Checks(char, ref)) do
     if chk[2] < ref then fails[#fails + 1] = chk end
   end
+  -- el banco solo puede sumar piezas: si ya tradea todo, no hace falta leerlo
   return {
     ok = #fails == 0,
     fails = fails,
-    noBank = not char.bankScanned,
+    noBank = not char.bankScanned and #fails > 0,
   }
 end
 
