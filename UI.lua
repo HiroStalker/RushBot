@@ -61,6 +61,7 @@ end
 function UI:BuildEntries()
   local search = (self.frame.search:GetText() or ""):lower()
   local onlyKey = RB.db.ui.onlyKey
+  local onlyTrade = RB.db.ui.onlyTrade
   local entries = {}
   for _, tag in ipairs(sortedAccounts()) do
     local acc = RB.db.accounts[tag]
@@ -68,7 +69,8 @@ function UI:BuildEntries()
     local chars = {}
     for charKey, char in pairs(acc.chars) do
       local nameMatch = tagMatch or (char.name or ""):lower():find(search, 1, true)
-      if nameMatch and (not onlyKey or char.key) and char.updated then
+      if nameMatch and (not onlyKey or char.key) and char.updated
+        and (not onlyTrade or RB:Evaluate(char).ok) then
         chars[#chars + 1] = { key = charKey, char = char }
       end
     end
@@ -307,6 +309,18 @@ function UI:Create()
   okLabel:SetPoint("LEFT", f.onlyKey, "RIGHT", 2, 0)
   okLabel:SetText("Solo con piedra")
 
+  -- oculta los que no llegan al ilvl de referencia en todos los slots
+  f.onlyTrade = CreateFrame("CheckButton", nil, f, "UICheckButtonTemplate")
+  f.onlyTrade:SetSize(22, 22)
+  f.onlyTrade:SetPoint("LEFT", okLabel, "RIGHT", 16, 0)
+  f.onlyTrade:SetScript("OnClick", function(cb)
+    RB.db.ui.onlyTrade = cb:GetChecked() and true or false
+    UI:Refresh()
+  end)
+  local otLabel = f:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+  otLabel:SetPoint("LEFT", f.onlyTrade, "RIGHT", 2, 0)
+  otLabel:SetText("Solo tradean todo")
+
   f.refText = f:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
   f.refText:SetPoint("TOPRIGHT", -20, -36)
 
@@ -349,6 +363,7 @@ function UI:Refresh()
   local f = self.frame
   if not f then return end
   f.onlyKey:SetChecked(RB.db.ui.onlyKey)
+  f.onlyTrade:SetChecked(RB.db.ui.onlyTrade)
   f.refText:SetText(("Ilvl ref: |cffffffff%d|r"):format(RB.db.settings.refIlvl or RB.DEFAULT_REF_ILVL))
 
   local entries = self:BuildEntries()

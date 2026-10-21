@@ -235,14 +235,24 @@ end
 local function groupHeader(selection)
   local n = #selection
   local header = ("**%s**"):format(TITLES[n] or "TT")
-  if n >= 4 then header = header .. "\n" .. ttSummary(selection) end
+  if n >= 4 then
+    -- TT: sin lista de personajes, pero se menciona a quien tenga Discord ID
+    local names = {}
+    for _, entry in ipairs(selection) do
+      if RB:IsValidDiscordId(entry.acc.discordId) then
+        names[#names + 1] = ("<@%s>"):format(entry.acc.discordId)
+      end
+    end
+    if #names > 0 then header = header .. "\n" .. table.concat(names, " ") end
+    header = header .. "\n" .. ttSummary(selection)
+  end
   return header
 end
 
 -- selection = lista ordenada de { tag = , acc = , chars = { char, ... } }
 -- Devuelve una lista de mensajes (cada uno < 2000 caracteres).
 function RB:BuildMessages(selection)
-  -- TT: solo el resumen (armaduras y piedras), sin la lista de personajes
+  -- TT: menciones + resumen (armaduras y piedras), sin la lista de personajes
   if #selection >= 4 then return { groupHeader(selection) } end
 
   local blocks = {}

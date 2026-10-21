@@ -18,6 +18,7 @@ local defaults = {
   ui = {
     selected = {},
     onlyKey = false,
+    onlyTrade = false,
   },
   minimap = {
     hide = false,
