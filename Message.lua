@@ -13,10 +13,10 @@ local E = {
 }
 
 local CLASS_EMOJI = {
-  WARRIOR = ":warrior:", PALADIN = ":paladin:", DEATHKNIGHT = ":deathknight:",
-  HUNTER = ":hunter:", SHAMAN = ":shaman:", EVOKER = ":evoker:",
-  DRUID = ":druid:", ROGUE = ":rogue:", MONK = ":monk:", DEMONHUNTER = ":demonhunter:",
-  MAGE = ":mage:", PRIEST = ":priest:", WARLOCK = ":warlock:",
+  WARRIOR = ":Warrior:", PALADIN = ":Paladin:", DEATHKNIGHT = ":deathknight:",
+  HUNTER = ":Hunter:", SHAMAN = ":Shaman:", EVOKER = ":Evoker:",
+  DRUID = ":Druid:", ROGUE = ":Rogue:", MONK = ":Monk:", DEMONHUNTER = ":demonhunter:",
+  MAGE = ":Mage:", PRIEST = ":Priest:", WARLOCK = ":Warlock:",
 }
 
 local CLASS_EN = {
