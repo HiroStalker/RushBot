@@ -255,9 +255,11 @@ function RB:BuildMessages(selection)
   -- TT: menciones + resumen (armaduras y piedras), sin la lista de personajes
   if #selection >= 4 then return { groupHeader(selection) } end
 
+  -- Solo: el mensaje lo pega uno mismo, mencionarse no aporta nada
+  local solo = #selection == 1
   local blocks = {}
   for _, entry in ipairs(selection) do
-    local lines = { accountHeader(entry.tag, entry.acc) }
+    local lines = solo and {} or { accountHeader(entry.tag, entry.acc) }
     for _, char in ipairs(entry.chars) do
       lines[#lines + 1] = charLine(char)
     end
